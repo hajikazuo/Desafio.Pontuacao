@@ -6,12 +6,13 @@ namespace Desafio.Pontuacao
     {
         static void Main(string[] args)
         {
-            var palavras = new List<string> { };
 
-            for (int i = 1; i <= 3; i++)
+            Console.WriteLine($"Digite uma série de palavras separando por espaço: ");
+            string[] palavras = Console.ReadLine().ToLower().Split(' ');
+
+            for (int i = 0; i < palavras.Length; i++)
             {
-                Console.WriteLine($"Digite a {i}ª palavra: ");
-                palavras.Add(Console.ReadLine());
+                palavras[i] = palavras[i].Trim();
             }
 
             string maiorPontuacao = EncontraMaiorPalavra(palavras);
@@ -19,7 +20,7 @@ namespace Desafio.Pontuacao
             Console.ReadKey();
         }
 
-        static string EncontraMaiorPalavra(List<string> palavras)
+        static string EncontraMaiorPalavra(string[] palavras)
         {
             string maiorPalavra = "";
             int maiorPontuacao = 0;
@@ -34,7 +35,7 @@ namespace Desafio.Pontuacao
                 {
                     maiorPontuacao = pontuacao;
                     maiorPalavra = palavra;
-                }   
+                }
             }
 
             return maiorPalavra;
@@ -52,6 +53,6 @@ namespace Desafio.Pontuacao
             return pontuacao;
         }
 
-        
+
     }
 }
