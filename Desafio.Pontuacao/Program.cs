@@ -1,4 +1,5 @@
 ﻿using System;
+using Spectre.Console;
 
 namespace Desafio.Pontuacao
 {
@@ -6,8 +7,8 @@ namespace Desafio.Pontuacao
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine($"Digite uma série de palavras separando por espaço: ");
+            AnsiConsole.Write(new Rule("Desafio do Jotinha").RuleStyle("cyan"));
+            AnsiConsole.MarkupLine("[aqua]Digite palavras separando por espaço:[/] [red](Obviamente evite acentos e números)[/] ");
             string[] palavras = Console.ReadLine().ToLower().Split(' ');
 
             for (int i = 0; i < palavras.Length; i++)
@@ -16,8 +17,10 @@ namespace Desafio.Pontuacao
             }
 
             string maiorPontuacao = EncontraMaiorPalavra(palavras);
-            Console.WriteLine($"\nA palavra de maior pontuação é: {maiorPontuacao}");
-            Console.ReadKey();
+
+            AnsiConsole.Write(new Rule("A palavra de maior pontuação é:").RuleStyle("cyan"));
+            AnsiConsole.Write(new FigletText(maiorPontuacao).Centered().Color(Color.Red));
+
         }
 
         static string EncontraMaiorPalavra(string[] palavras)
@@ -25,11 +28,16 @@ namespace Desafio.Pontuacao
             string maiorPalavra = "";
             int maiorPontuacao = 0;
 
+            var table = new Table();
+            table.Border = TableBorder.Double;
+            table.AddColumn("Palavra");
+            table.AddColumn("Pontuação");
+
             foreach (var palavra in palavras)
             {
                 int pontuacao = CalculaPontuacao(palavra);
 
-                Console.WriteLine($"\n{palavra}: {pontuacao}");
+                table.AddRow(palavra, pontuacao.ToString());
 
                 if (pontuacao > maiorPontuacao)
                 {
@@ -37,6 +45,9 @@ namespace Desafio.Pontuacao
                     maiorPalavra = palavra;
                 }
             }
+
+            table.Expand();
+            AnsiConsole.Write(table);
 
             return maiorPalavra;
         }
@@ -52,7 +63,5 @@ namespace Desafio.Pontuacao
 
             return pontuacao;
         }
-
-
     }
 }
