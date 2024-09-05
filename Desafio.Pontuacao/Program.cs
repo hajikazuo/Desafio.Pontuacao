@@ -8,14 +8,25 @@ namespace Desafio.Pontuacao
         static void Main(string[] args)
         {
             AnsiConsole.Write(new Rule("Desafio do Jotinha").RuleStyle("cyan"));
-            AnsiConsole.MarkupLine("[aqua]Digite palavras separando por espaço:[/] [red](Obviamente evite acentos e números)[/] ");
-            string[] palavras = Console.ReadLine().ToLower().Split(' ');
+            string[] palavras;
 
-            for (int i = 0; i < palavras.Length; i++)
+            while (true)
             {
-                palavras[i] = palavras[i].Trim();
-            }
+                AnsiConsole.MarkupLine("[aqua]Digite palavras separando por espaço:[/]");
+                palavras = Console.ReadLine().ToLower().Split(' ');
 
+                for (int i = 0; i < palavras.Length; i++)
+                {
+                    palavras[i] = palavras[i].Trim();
+                }
+
+                if (ValidaPalavras(palavras))
+                {
+                    break;
+                }
+
+                AnsiConsole.MarkupLine("[red]Erro: Apenas letras são permitidas. Tente novamente![/]");
+            }
             string maiorPontuacao = EncontraMaiorPalavra(palavras);
 
             AnsiConsole.Write(new Rule("A palavra de maior pontuação é:").RuleStyle("cyan"));
@@ -62,6 +73,18 @@ namespace Desafio.Pontuacao
             }
 
             return pontuacao;
+        }
+
+        static bool ValidaPalavras(string[] palavras)
+        {
+            foreach (var palavra in palavras)
+            {
+                if (!palavra.All(char.IsLetter))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
