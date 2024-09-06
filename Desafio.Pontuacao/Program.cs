@@ -18,7 +18,7 @@ namespace Desafio.Pontuacao
 
             if (!ValidaPalavras(palavras))
             {
-                AnsiConsole.MarkupLine("[yellow]Alerta: Letras e acentos dão pontuações diferentes!![/]");
+                AnsiConsole.MarkupLine("[yellow]Alerta: Números e acentos dão pontuações diferentes!![/]");
             }
 
             string maiorPontuacao = EncontraMaiorPalavra(palavras);
