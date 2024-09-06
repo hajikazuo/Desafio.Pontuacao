@@ -11,11 +11,6 @@ namespace Desafio.Pontuacao
             AnsiConsole.MarkupLine("[aqua]Digite palavras separando por espaço:[/]");
             string[] palavras = Console.ReadLine().ToLower().Split(' ');
 
-            for (int i = 0; i < palavras.Length; i++)
-            {
-                palavras[i] = palavras[i].Trim();
-            }
-
             if (!ValidaPalavras(palavras))
             {
                 AnsiConsole.MarkupLine("[yellow]Alerta: Números e acentos dão pontuações diferentes!![/]");
